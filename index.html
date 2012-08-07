@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>dev.tiqav.com by tiqav</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>dev.tiqav.com</h1>
+          <h2>tiqav API Documentation</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/tiqav/dev.tiqav.com/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/tiqav/dev.tiqav.com/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/tiqav/dev.tiqav.com" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <p><a href="http://tiqav.com/">http://tiqav.com/</a></p>
+
+<hr><h2>Attention</h2>
+
+<ul>
+<li>Production Environment
+
+<ul>
+<li>api.tiqav.com</li>
+</ul>
+</li>
+<li>Development Environment
+
+<ul>
+<li>sandbox.api.tiqav.com</li>
+</ul>
+</li>
+</ul><hr><h2>Search API</h2>
+
+<ul>
+<li>Example Response</li>
+</ul><pre><code>[
+ {"id":"3om","ext":"jpg","height":1442,"width":1036,"source_url":"http://example.com/image1.jpg"}, 
+ {"id":"1eb","ext":"jpg","height":171,"width":250,"source_url":"http://example.com/image2.jpg"}
+]
+</code></pre>
+
+<h3>GET search</h3>
+
+<pre><code>http://api.tiqav.com/search.json?q=[query]&amp;callback=[fucntion_name]
+</code></pre>
+
+<h3>GET search/newest</h3>
+
+<pre><code>http://api.tiqav.com/search/newest.json?callback=[fucntion_name]
+</code></pre>
+
+<h3>GET search/random</h3>
+
+<pre><code>http://api.tiqav.com/search/random.json?&amp;callback=[fucntion_name]
+</code></pre>
+
+<hr><h2>Image API</h2>
+
+<ul>
+<li>Example Response</li>
+</ul><pre><code>{"id":"3om","ext":"jpg","height":1442,"width":1036,"source_url":"http://example.com/image1.jpg"}
+</code></pre>
+
+<h3>GET images/[id]</h3>
+
+<pre><code>http://api.tiqav.com/images/[id].json
+</code></pre>
+
+<h3>POST images</h3>
+
+<pre><code>http://api.tiqav.com/images.json
+url=[http://example.com/image.(jpe?g|png|gif)]&amp;serifu=[画像内のセリフ、テロップ等の文字列]&amp;tags=[comma,separated,tags]&amp;callback=[fucntion_name]
+</code></pre>
+
+<ul>
+<li>Either <em>'serifu'</em> or <em>'tags'</em> is required</li>
+<li>In the development environment, this API is executed in <em>'dry run'</em> mode.</li>
+<li>Alias <em>'GET images.json?url=[...]&amp;serifu=[...]&amp;tags=[...]&amp;callback=[...]'</em>
+</li>
+</ul><hr><h2>Tag API</h2>
+
+<ul>
+<li>Example Response</li>
+</ul><pre><code>["tag1", "tag2"]
+</code></pre>
+
+<h3>GET images/[id]/tags</h3>
+
+<pre><code>http://api.tiqav.com/images/[id]/tags.json?callback=[fucntion_name]
+</code></pre>
+
+<h3>POST images/[id]/tags</h3>
+
+<pre><code>http://api.tiqav.com/images/[id]/tags.json
+tags=[comma,separated,tags]&amp;callback=[fucntion_name]
+</code></pre>
+
+<ul>
+<li>Alias <em>'GET images/[id]/tags/add.json?tags=[...]&amp;callback=[...]'</em>
+</li>
+</ul><h3>DELETE images/[id]/tags</h3>
+
+<pre><code>http://api.tiqav.com/images/[id]/tags.json
+_method=DELETE&amp;tags=[comma,separated,tags]&amp;callback=[fucntion_name]
+</code></pre>
+
+<ul>
+<li>Alias <em>'GET images/[id]/tags/remove.json?tags=[...]&amp;callback=[...]'</em>
+</li>
+</ul><h3>GET tags</h3>
+
+<pre><code>http://api.tiqav.com/tags.json?q=[query]&amp;callback=[fucntion_name]
+</code></pre>
+
+<hr><h2>Image URL</h2>
+
+<h3>Original</h3>
+
+<pre><code>http://img.tiqav.com/[id].[ext]
+</code></pre>
+
+<ul>
+<li>Example URL
+
+<ul>
+<li><a href="http://img.tiqav.com/3om.jpg">http://img.tiqav.com/3om.jpg</a></li>
+</ul>
+</li>
+</ul><h3>Thumbnail</h3>
+
+<pre><code>http://img.tiqav.com/[id].th.jpg
+</code></pre>
+
+<ul>
+<li>Example URL
+
+<ul>
+<li><a href="http://img.tiqav.com/3om.th.jpg">http://img.tiqav.com/3om.th.jpg</a></li>
+</ul>
+</li>
+</ul><h3>Glitch</h3>
+
+<pre><code>http://img.tiqav.com/[id].glitch
+</code></pre>
+
+<ul>
+<li>Example URL
+
+<ul>
+<li><a href="http://img.tiqav.com/3om.glitch">http://img.tiqav.com/3om.glitch</a></li>
+</ul>
+</li>
+</ul><h3>I'm Feeling Lucky</h3>
+
+<pre><code>http://[query].tiqav.com/
+</code></pre>
+
+<ul>
+<li>Example URL
+
+<ul>
+<li><a href="http://xn--y8j9a1i.tiqav.com/">http://ちくわ.tiqav.com/</a></li>
+</ul>
+</li>
+</ul>
+        </section>
+
+        <footer>
+          dev.tiqav.com is maintained by <a href="https://github.com/tiqav">tiqav</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
